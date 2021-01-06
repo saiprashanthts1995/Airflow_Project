@@ -5,25 +5,25 @@ from airflow.utils.dates import days_ago
 from datetime import timedelta
 
 
-def push_function(ti):
+def push_function(ti, **kwargs):
     """
     Simple Python Function to push value
     :return:
     """
     a = 1
     b = 2
-    c= a + b
+    c = a + b
     ti.xcom_push(key='c', value=c)
     return a+b
 
 
-def receive_function(ti):
+def receive_function(ti, **kwargs):
     """
     to receive the value from XCOM
     :param ti: cross function element
     :return:
     """
-    output = ti.xcom_pull(key='c',task_ids=['Xcom_Push'])
+    output = ti.xcom_pull(key='c', task_ids=['Xcom_Push'])
     print(output)
 
 
@@ -50,12 +50,14 @@ dummy_task = DummyOperator(
 push_task = PythonOperator(
     task_id='Xcom_Push',
     python_callable=push_function,
+    provide_context=True,
     dag=dag
 )
 
 pull_task = PythonOperator(
     task_id='Xcom_Pull',
     python_callable=receive_function,
+    provide_context=True,
     dag=dag
 )
 

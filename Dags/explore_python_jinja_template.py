@@ -36,6 +36,7 @@ dummy_task = DummyOperator(
 python_task = PythonOperator(
     task_id='Python_Hello_Word',
     python_callable=hello_world,
+    op_kwargs={"name": 'Sai Prashanth T S'},
     dag=dag
 )
 

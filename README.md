@@ -1,7 +1,7 @@
 # Airflow_Project
 Orchestrate Data Engineering activities using Airflow
 
-## for the purpose of this project, I have provisioned Apache Airflow which is present in AWS as an serverless service. I have provisioned a server which is of small worker for practice purpose with only one worker. Below Image shows the Airflow environemnt created using AWS
+For the purpose of this project, I have provisioned Apache Airflow which is present in AWS as an serverless service. I have provisioned a server which is of small worker for practice purpose with only one worker. Below Image shows the Airflow environemnt created using AWS
 ![AWS_Airflow](https://github.com/saiprashanthts1995/Airflow_Project/blob/main/images/airflow.PNG)
 
 ## Below represents the list of task which I have accomplised using the Airflow environment which was created before

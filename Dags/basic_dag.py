@@ -1,7 +1,8 @@
-from airflow import dag
-from airflow.models import Variable
+from airflow import DAG
 from datetime import datetime
 from airflow.operators import BashOperator, DummyOperator, PythonOperator
+from airflow.utils.dates import days_ago
+from datetime import timedelta
 
 
 def hello_sai():
@@ -15,13 +16,16 @@ def hello_sai():
 dag_arguments = {
     'Owner': 'Sai',
     'depends_on_past': False,
-    'start_date': datetime(2021, 1, 6)
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5)
 }
 
-dag = Dag(
-    dag_id='Basic Airflow Check',
+dag = DAG(
+    dag_id='Basic_Airflow_Check',
     default_args=dag_arguments,
-    schedule_interval=None
+    description='A simple tutorial DAG',
+    schedule_interval=timedelta(days=1),
+    start_date=days_ago(2)
 )
 
 dummy_task = DummyOperator(
@@ -36,7 +40,7 @@ python_task = PythonOperator(
 )
 
 Bash_task = BashOperator(
-    task_id='print date',
+    task_id='print_date',
     bash_command='date +%d%m%y',
     dag=dag
 )

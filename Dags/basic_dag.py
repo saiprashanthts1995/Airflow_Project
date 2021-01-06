@@ -20,7 +20,8 @@ dag_arguments = {
 
 dag = Dag(
     dag_id='Basic Airflow Check',
-    default_args=dag_arguments
+    default_args=dag_arguments,
+    schedule_interval=None
 )
 
 dummy_task = DummyOperator(

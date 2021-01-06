@@ -26,6 +26,12 @@ list_files_task = BashOperator(
     dag=dag
 )
 
+copy_file_task = BashOperator(
+    task_id='Copy_file',
+    bash_command='aws s3 cp s3://sai-learn-airflow/packages/requirement.txt s3://sai-learn-airflow/a/requirement.txt',
+    dag=dag
+)
+
 s3_key_sensor = S3KeySensor(
     task_id='S3_Check_file_sensor',
     bucket_key='s3://sai-learn-airflow/dags/basic_dag.py',
@@ -34,4 +40,4 @@ s3_key_sensor = S3KeySensor(
     dag=dag
 )
 
-dummy_task >> list_files_task >> s3_key_sensor
+dummy_task >> list_files_task >> copy_file_task >> s3_key_sensor
